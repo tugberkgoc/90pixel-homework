@@ -11,9 +11,7 @@ class Page extends React.Component {
       inputValue: '',
       dropdownValue: '',
       isSearchComplete: false,
-      title: '',
-      released: '',
-      poster: null
+      searchList: []
     }
   }
 
@@ -23,22 +21,27 @@ class Page extends React.Component {
 
     let res = await axios.get('http://www.omdbapi.com/', {
       params: {
-        t: title,
+        s: title,
         apikey: 'd5b5a7ff'
       }
     })
 
-    this.state.title = res.data['Title']
-    this.state.released = res.data['Released']
-    this.state.poster = res.data['Poster']
+    console.log(res.data['Search'])
+
+    let temp = res.data['Search']
+
+    temp.forEach(x => {
+      this.state.searchList.push({
+        title: x['Title'],
+        imageUrl: x['Poster'] === 'N/A' ? '' : x['Poster'],
+        releaseDate: x['Released'],
+        imdbRating: x['imdbRating']
+      })
+    })
 
     this.setState({
       isSearchComplete: true
     })
-
-    console.log(this.state.title)
-
-    console.log(res.data)
   }
 
   updateInputValue = (evt) => {
@@ -47,15 +50,8 @@ class Page extends React.Component {
     })
   }
 
-  updateDropdown = (val) => {
-    this.setState({
-      dropdownValue: val
-    })
-  }
-
-
   render() {
-    let {inputValue, isSearchComplete, title, released, poster} = this.state
+    let {inputValue, isSearchComplete, searchList} = this.state
 
     return (
         <Layout>
@@ -86,11 +82,9 @@ class Page extends React.Component {
                 <button onClick={() => this.get()} type="button" className="btn btn-primary mb-3">Search</button>
               </div>
 
-
               <div>
-                {isSearchComplete && <Card title={title} releaseDate={released} imageUrl={poster}/>}
+                {isSearchComplete && searchList.map(item => <Card title={item.title} imageUrl={item.imageUrl} releaseDate={item.releaseDate} imdbRating={item.imdbRating}/>)}
               </div>
-
 
             </div>
           </div>

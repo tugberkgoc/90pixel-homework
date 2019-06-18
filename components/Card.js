@@ -1,4 +1,4 @@
-const Card = ({title, releaseDate, imageUrl}) => (
+const Card = ({title, imageUrl, releaseDate, imdbRating}) => (
 
     <div className="card mb-3" style={{maxWidth: "540px"}}>
       <div className="row no-gutters">
@@ -8,7 +8,7 @@ const Card = ({title, releaseDate, imageUrl}) => (
         <div className="col-md-8">
           <div className="card-body">
             <h5 className="card-title">{title}</h5>
-            <p className="card-text">Sample Text.</p>
+            <p className="card-text">{imdbRating}</p>
             <p className="card-text">
               <small className="text-muted">{releaseDate}</small>
             </p>
