@@ -14,10 +14,6 @@ class SearchStore {
     this.favList.push(item)
     localStorage.setItem('fav', JSON.stringify(this.favList))
   }
-
-  getFavs = () => {
-    this.favList = JSON.parse(localStorage.getItem('fav'))
-  }
 }
 
 decorate(SearchStore, {

@@ -6,17 +6,8 @@ import Card from "../components/Card";
 
 class Favorites extends React.Component {
 
-  componentCleanup() {
-    searchStore.getFavs()
-  }
-
   componentDidMount(){
-    window.addEventListener('beforeunload', this.componentCleanup)
-  }
-
-  componentWillUnmount() {
-    this.componentCleanup();
-    window.removeEventListener('beforeunload', this.componentCleanup)
+    searchStore.favList = JSON.parse(localStorage.getItem('fav'))
   }
 
   render() {
