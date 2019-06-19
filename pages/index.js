@@ -12,15 +12,18 @@ const Page = observer(
         super(props);
         this.state = {
           inputValue: '',
+          yearValue: '',
           isSelected: null
         }
       }
 
       get = async () => {
+        searchStore.searchList = []
 
         let res = await axios.get('http://www.omdbapi.com/', {
           params: {
             s: this.state.inputValue,
+            y: this.state.yearValue !== '' && this.state.yearValue,
             type: this.state.isSelected !== false && this.state.isSelected,
             apikey: 'd5b5a7ff'
           }
@@ -51,6 +54,12 @@ const Page = observer(
         })
       }
 
+      updateYearValue = (evt) => {
+        this.setState({
+          yearValue: evt.target.value
+        })
+      }
+
       updateSearchList = (val) => {
         this.setState({
           searchList: val
@@ -58,7 +67,7 @@ const Page = observer(
       }
 
       render() {
-        const {inputValue} = this.state
+        const {inputValue, yearValue} = this.state
 
         return (
             <Layout>
@@ -68,10 +77,17 @@ const Page = observer(
                   <p className="lead">You can find your favorite movie, series or episodes.<br/> Also, you can add these
                     your favorite list.</p>
 
-                  <div className="input-group mb-3">
-                    <input value={inputValue} onChange={evt => this.updateInputValue(evt)} type="text"
-                           className="form-control" placeholder="Name" aria-label="Name"
-                           aria-describedby="basic-addon1"/>
+                  <div className="row pb-3">
+                    <div className="input-group col-md-6">
+                      <input value={inputValue} onChange={evt => this.updateInputValue(evt)} type="text"
+                             className="form-control" placeholder="Name" aria-label="Name"
+                             aria-describedby="basic-addon1"/>
+                    </div>
+                    <div className="input-group col-md-6">
+                      <input value={yearValue} onChange={evt => this.updateYearValue(evt)} type="text"
+                             className="form-control" placeholder="Year" aria-label="Year"
+                             aria-describedby="basic-addon1"/>
+                    </div>
                   </div>
 
                   <div className="form-check form-check-inline">

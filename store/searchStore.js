@@ -2,17 +2,17 @@ import {decorate, observable} from 'mobx'
 
 class SearchStore {
   searchList = [] || localStorage.getItem('favorites')
-  favList = []
+  favList = [] //  typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('fav')) :
 
   newSearchItem = (searchItem) => {
     this.searchList.push(searchItem)
-    localStorage.setItem('favorites', this.searchList)
+    localStorage.setItem('favorites', JSON.stringify(this.searchList))
   }
 
   addToFav = (item) => {
     item.isAddedToFav = true
     this.favList.push(item)
-    localStorage.setItem('fav', this.favList)
+    localStorage.setItem('fav', JSON.stringify(this.favList))
   }
 }
 
