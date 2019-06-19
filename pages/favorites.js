@@ -1,4 +1,3 @@
-import axios from 'axios'
 import Layout from '../components/Layout'
 import Link from 'next/link'
 import React from "react"
@@ -6,6 +5,19 @@ import searchStore from "../store/searchStore";
 import Card from "../components/Card";
 
 class Favorites extends React.Component {
+
+  componentCleanup() {
+    searchStore.getFavs()
+  }
+
+  componentDidMount(){
+    window.addEventListener('beforeunload', this.componentCleanup)
+  }
+
+  componentWillUnmount() {
+    this.componentCleanup();
+    window.removeEventListener('beforeunload', this.componentCleanup)
+  }
 
   render() {
 
