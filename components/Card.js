@@ -1,4 +1,5 @@
 import {MdFavorite, MdFavoriteBorder} from "react-icons/md"
+import searchStore from '../store/searchStore'
 
 const Card = ({title, imageUrl, releaseDate, imdbRating, isAddedToFav}) => (
 
@@ -13,11 +14,11 @@ const Card = ({title, imageUrl, releaseDate, imdbRating, isAddedToFav}) => (
               <h5 className="card-title">{title} {isAddedToFav ?
                   <span onClick={() => isAddedToFav = !isAddedToFav}><MdFavorite/></span> :
                   <span onClick={() => isAddedToFav = !isAddedToFav}><MdFavoriteBorder/></span>}</h5>
-              <p className="card-text">{imdbRating}</p>
+              <p className="card-text">{imdbRating === 'N/A' ? '0.0' : imdbRating}</p>
               <p className="card-text">
-                <small className="text-muted">{releaseDate}</small>
+                {releaseDate !== 'N/A' && <small className="text-muted">{releaseDate}</small>}
               </p>
-              <button onClick={() => isAddedToFav = !isAddedToFav}>Add to Favorites</button>
+              <button onClick={() => searchStore.addToFav({title, imageUrl, releaseDate, imdbRating, isAddedToFav})}>Add to Favorites</button>
             </div>
           </div>
         </div>

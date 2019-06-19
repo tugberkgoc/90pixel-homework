@@ -1,7 +1,19 @@
-import {decorate, observable} from 'mobx' // TODO:
+import {decorate, observable} from 'mobx'
 
 class SearchStore {
-  searchList = []
+  searchList = [] || localStorage.getItem('favorites')
+  favList = []
+
+  newSearchItem = (searchItem) => {
+    this.searchList.push(searchItem)
+    localStorage.setItem('favorites', this.searchList)
+  }
+
+  addToFav = (item) => {
+    item.isAddedToFav = true
+    this.favList.push(item)
+    localStorage.setItem('fav', this.favList)
+  }
 }
 
 decorate(SearchStore, {
