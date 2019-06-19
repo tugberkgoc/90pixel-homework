@@ -6,7 +6,6 @@ class SearchStore {
 
   newSearchItem = (searchItem) => {
     this.searchList.push(searchItem)
-    localStorage.setItem('list', JSON.stringify(this.searchList))
   }
 
   addToFav = (item) => {
