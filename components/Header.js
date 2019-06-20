@@ -3,12 +3,19 @@ import Link from 'next/link'
 const Header = () => (
     <header>
       <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+
         <Link href="/">
           <a className="navbar-brand">Homework</a>
         </Link>
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
+
+        <button className="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarsExampleDefault"
+                aria-controls="navbarsExampleDefault"
+                aria-expanded="false"
                 aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"/>
         </button>
 
         <div className="collapse navbar-collapse" id="navbarsExampleDefault">
@@ -19,7 +26,7 @@ const Header = () => (
               </Link>
             </li>
             <li className="nav-item active">
-              <Link href="/favorites">
+              <Link href={"/favorites"}>
                 <a className="nav-link">Favorites <span className="sr-only">(current)</span></a>
               </Link>
             </li>

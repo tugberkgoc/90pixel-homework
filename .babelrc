@@ -1,24 +1,43 @@
 {
   "plugins": [
-    "transform-decorators-legacy",
     [
       "transform-assets-import-to-string",
       {
         "baseDir": "static",
         "baseUri": "/"
       }
-    ],[
-      "module-resolver", {
-        "root": ["."],
+    ],
+    [
+      "module-resolver",
+      {
+        "root": [
+          "."
+        ],
         "alias": {
           "styles": "./styles"
         },
         "cwd": "babelrc"
       }
-    ],[
+    ],
+    [
       "wrap-in-js",
       {
-        "extensions": ["css$", "scss$"]
+        "extensions": [
+          "css$",
+          "scss$"
+        ]
+      }
+    ],
+    [
+      "@babel/plugin-proposal-decorators",
+      {
+        "legacy": true
+      }
+    ],
+    [
+      "@babel/plugin-proposal-class-properties",
+      {
+        "loose": true
       }
     ]
   ],
