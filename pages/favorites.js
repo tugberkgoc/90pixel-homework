@@ -37,13 +37,13 @@ class Favorites extends React.Component {
 
     return (
         <Layout>
+          <div className="container">
+            <h1 className="text-center pt-3 pb-3">Favorites</h1>
 
-          <h1 className="text-center pt-3 pb-3">Favorites</h1>
-
-          <div className="row text-center">
-            {this.renderList()}
+            <div className="row text-center">
+              {this.renderList()}
+            </div>
           </div>
-
         </Layout>
     )
   }
