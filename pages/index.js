@@ -24,7 +24,8 @@ class Page extends React.Component {
   }
 
   getSearchList = async () => {
-     let response = await searchStore.addToSearchList(this.state.inputValue, this.state.yearValue, this.state.isSelected)
+    let response = await searchStore.addToSearchList(this.state.inputValue, this.state.yearValue, this.state.isSelected)
+    response === 200 ? console.log('Success') : console.log('Unable to get data')
   }
 
   updateInputValue = (evt) => {
@@ -43,6 +44,7 @@ class Page extends React.Component {
     return [...searchStore.searchList].map(item => {
       return (
           <Card
+              key={item.id}
               id={item.id}
               title={item.title}
               imageUrl={item.imageUrl}
@@ -66,22 +68,18 @@ class Page extends React.Component {
 
               <div className="row pb-3">
                 <div className="input-group col-md-6">
-                <input value={inputValue}
-                       onChange={evt => this.updateInputValue(evt)}
-                       type="text"
-                       className="form-control"
-                       placeholder="Name"
-                       aria-label="Name"
-                       aria-describedby="basic-addon1"/>
+                  <input value={inputValue}
+                         onChange={evt => this.updateInputValue(evt)}
+                         type="text"
+                         className="form-control"
+                         placeholder="Name"/>
                 </div>
                 <div className="input-group col-md-6">
                   <input value={yearValue}
                          onChange={evt => this.updateYearValue(evt)}
                          type="text"
                          className="form-control"
-                         placeholder="Year"
-                         aria-label="Year"
-                         aria-describedby="basic-addon1"/>
+                         placeholder="Year"/>
                 </div>
               </div>
 

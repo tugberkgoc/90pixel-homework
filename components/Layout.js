@@ -6,10 +6,10 @@ import bootstrapStyle from 'bootstrap/dist/css/bootstrap.css'
 import fontawesomeStyle from 'font-awesome/css/font-awesome.css'
 import stylesheet from 'styles/index.scss'
 
-const Layout = ({children, title}) => (
+const Layout = ({children}) => (
     <div>
       <Head>
-        <title>{title}</title>
+        <title>90Pixel</title>
         <meta charSet='utf-8'/>
         <meta name='viewport' content='initial-scale=1.0, width=device-width'/>
         <style dangerouslySetInnerHTML={{__html: bootstrapStyle}}/>

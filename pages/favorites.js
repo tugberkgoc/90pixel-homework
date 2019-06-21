@@ -18,6 +18,7 @@ class Favorites extends React.Component {
     return [...searchStore.favList].map(item => {
       return (
           <Card
+              key={item.id}
               id={item.id}
               title={item.title}
               imageUrl={item.imageUrl}

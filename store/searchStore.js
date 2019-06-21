@@ -42,26 +42,30 @@ class SearchStore {
       }
     })
 
-    res.data['Search'].forEach(async item => {
+    let data = res.data['Search'] ? res.data['Search'] : 200
 
-      let {data} = await axios.get('http://www.omdbapi.com/', {
-        params: {
-          i: item['imdbID'],
-          apikey: 'd5b5a7ff'
-        }
+    if (data !== 200) {
+      data.forEach(async item => {
+
+        let {data} = await axios.get('http://www.omdbapi.com/', {
+          params: {
+            i: item['imdbID'],
+            apikey: 'd5b5a7ff'
+          }
+        })
+
+        this.pushItemToSearchList({
+          id: item['imdbID'],
+          title: item['Title'],
+          imageUrl: item['Poster'] === 'N/A' ? '' : item['Poster'],
+          releaseDate: data['Released'],
+          imdbRating: data.imdbRating,
+          isAddedToFav: false
+        })
       })
 
-      this.pushItemToSearchList({
-        id: item['imdbID'],
-        title: item['Title'],
-        imageUrl: item['Poster'] === 'N/A' ? '' : item['Poster'],
-        releaseDate: data['Released'],
-        imdbRating: data.imdbRating,
-        isAddedToFav: false
-      })
-    })
-
-    return res.status
+      return res.status
+    }
   }
 }
 
