@@ -17,14 +17,14 @@ class Page extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      inputValue: '',
       yearValue: '',
-      isSelected: null
+      inputValue: '',
+      selectedOption: 'movie'
     }
   }
 
   getSearchList = async () => {
-    let response = await searchStore.addToSearchList(this.state.inputValue, this.state.yearValue, this.state.isSelected)
+    let response = await searchStore.addToSearchList(this.state.inputValue, this.state.yearValue, this.state.selectedOption)
     response === 200 ? console.log('Success') : console.log('Unable to get data')
   }
 
@@ -37,6 +37,12 @@ class Page extends React.Component {
   updateYearValue = (evt) => {
     this.setState({
       yearValue: evt.target.value
+    })
+  }
+
+  handleOptionChange = changeEvent => {
+    this.setState({
+      selectedOption: changeEvent.target.value
     })
   }
 
@@ -87,8 +93,9 @@ class Page extends React.Component {
                 <input className="form-check-input"
                        type="radio"
                        name="inlineRadioOptions"
-                       value="option1"
-                       onClick={() => this.state.isSelected = 'movie'}/>
+                       value="movie"
+                       checked={this.state.selectedOption === 'movie'}
+                       onChange={this.handleOptionChange}/>
                 <label className="form-check-label" htmlFor="inlineRadio1">Movie</label>
               </div>
 
@@ -96,18 +103,18 @@ class Page extends React.Component {
                 <input className="form-check-input"
                        type="radio"
                        name="inlineRadioOptions"
-                       id="inlineRadio2"
-                       value="option2"
-                       onClick={() => this.state.isSelected = 'series'}/>
+                       value="series"
+                       checked={this.state.selectedOption === 'series'}
+                       onChange={this.handleOptionChange}/>
                 <label className="form-check-label" htmlFor="inlineRadio2">Series</label>
               </div>
               <div className="form-check form-check-inline mb-3">
                 <input className="form-check-input"
                        type="radio"
                        name="inlineRadioOptions"
-                       id="inlineRadio3"
-                       value="option3"
-                       onClick={() => this.state.isSelected = 'episode'}/>
+                       value="episode"
+                       checked={this.state.selectedOption === 'episode'}
+                       onChange={this.handleOptionChange}/>
                 <label className="form-check-label" htmlFor="inlineRadio2">Episode</label>
               </div>
 
