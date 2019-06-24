@@ -15,18 +15,20 @@ const Card = dynamic(
 class Favorites extends React.Component {
 
   renderList = () => {
-    return [...searchStore.favList].map(item => {
-      return (
-          <Card
-              key={item.id}
-              id={item.id}
-              title={item.title}
-              imageUrl={item.imageUrl}
-              imdbRating={item.imdbRating}
-              releaseDate={item.releaseDate}
-              isAddedToFav={item.isAddedToFav}/>
-      )
-    })
+    if (searchStore.favList) {
+      return [...searchStore.favList].map(item => {
+        return (
+            <Card
+                key={item.id}
+                id={item.id}
+                title={item.title}
+                imageUrl={item.imageUrl}
+                imdbRating={item.imdbRating}
+                releaseDate={item.releaseDate}
+                isAddedToFav={item.isAddedToFav}/>
+        )
+      })
+    }
   }
 
   componentDidMount() {
